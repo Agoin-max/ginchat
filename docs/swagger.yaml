@@ -1,0 +1,76 @@
+definitions:
+  api.UserBody:
+    properties:
+      account:
+        description: 用户名
+        type: string
+      password:
+        description: 密码
+        type: string
+    type: object
+  utils.ResponseStruct:
+    properties:
+      code:
+        description: 状态码
+        type: integer
+      data:
+        description: 数据结构体
+      msg:
+        description: 响应说明
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /api/user/login:
+    post:
+      parameters:
+      - description: Json请求体
+        in: body
+        name: object
+        schema:
+          $ref: '#/definitions/api.UserBody'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.ResponseStruct'
+      summary: 用户登录
+      tags:
+      - 用户模块
+  /api/user/register:
+    post:
+      parameters:
+      - description: Json请求体
+        in: body
+        name: object
+        schema:
+          $ref: '#/definitions/api.UserBody'
+      - description: Bearer
+        in: header
+        name: Authorization
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.ResponseStruct'
+      summary: 用户注册
+      tags:
+      - 用户模块
+  /api/user/searchFriends:
+    get:
+      parameters:
+      - description: 用户ID
+        in: query
+        name: userId
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.ResponseStruct'
+      summary: 查询联系人
+      tags:
+      - 用户模块
+swagger: "2.0"
